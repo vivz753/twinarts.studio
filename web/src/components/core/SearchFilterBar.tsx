@@ -2,7 +2,7 @@ import {
   Dropdown,
   Option,
   priceOptions,
-  dominantColorOptions,
+  sizeOptions,
   artistOptions,
   availabilityOptions,
 } from "@src/components/core/Dropdown"
@@ -13,6 +13,8 @@ export interface SearchFilterBarProps {
   setSearchValue: React.Dispatch<React.SetStateAction<string>>
   availability?: Option
   setAvailability?: React.Dispatch<React.SetStateAction<Option>>
+  size?: Option
+  setSize?: React.Dispatch<React.SetStateAction<Option>>
   price?: Option
   setPrice?: React.Dispatch<React.SetStateAction<Option>>
   artist: Option
@@ -27,6 +29,8 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
   setSearchValue,
   availability,
   setAvailability,
+  size,
+  setSize,
   price,
   setPrice,
   artist,
@@ -51,6 +55,12 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
                 options={availabilityOptions}
                 currentOption={availability}
               />
+            </div>
+          )}
+          {size && setSize && (
+            <div className="flex flex-col items-start gap-1">
+              <span className="whitespace-nowrap">Size</span>
+              <Dropdown setOption={(size) => setSize(size)} options={sizeOptions} currentOption={size} />
             </div>
           )}
           {artist && setArtist && (

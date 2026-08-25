@@ -98,6 +98,12 @@ export const dominantColorOptions: Option[] = [
   { title: "Warm Palette", value: "warmPalette" },
 ]
 
+export const sizeOptions: Option[] = [
+  { title: "Any", value: "any" },
+  { title: "Small", value: "small" },
+  { title: "Medium", value: "medium" },
+  { title: "Large", value: "large" },
+]
 export const priceOptions: Option[] = [
   { title: "Low to High", value: "ascending" },
   { title: "High to Low", value: "descending" },
@@ -112,5 +118,5 @@ export const availabilityOptions: Option[] = [
   { title: "Display Only", value: "displayOnly" },
   { title: "For Sale", value: "forSale" },
   { title: "Sold", value: "sold" },
-  { title: "Reserved", value: "reserved" },
+  { title: "Private Collection", value: "reserved" },
 ]

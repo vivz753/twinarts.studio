@@ -48,6 +48,22 @@ export const filterBySearch = (products: ArtWork[], input: string) => {
 //   return products.filter((product) => product.dimensions.toLowerCase() === input.value.toLowerCase())
 // }
 
+export const filterBySize = (products: ArtWork[], input: { title: string; value: string }) => {
+  if (input.value === "any") return products
+  // small < 16 & > 0
+  // med < 32 & > 16
+  // large > 32
+
+  const filtered = products.filter((product) => {
+    const longestSide = Math.max(product.width, product.height)
+    if (input.value === "large" && longestSide > 30) return true
+    if (input.value === "medium" && longestSide > 16) return true
+    if (input.value === "small" && longestSide > 0 && longestSide < 16) return true
+    return false
+  })
+  return filtered
+}
+
 export const filterByAvailability = (products: ArtWork[], input: { title: string; value: string }) => {
   if (input.value === "all") return products
 
