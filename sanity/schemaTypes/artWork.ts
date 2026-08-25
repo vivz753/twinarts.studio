@@ -49,9 +49,9 @@ export const artWork = defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Display Only', value: 'displayOnly'},
-          {title: 'Reserved', value: 'reserved'},
-          {title: 'For Sale', value: 'forSale'},
+          {title: 'Available', value: 'available'},
+          {title: 'Private Collection', value: 'privateCollection'},
+          {title: 'Not For Sale', value: 'notForSale'},
           {title: 'Sold', value: 'sold'},
         ],
         layout: 'radio',
@@ -67,12 +67,12 @@ export const artWork = defineType({
       type: 'number',
       description:
         'Multiply by 100 e.g. for $1, the price here would be 100, $99 would be 9900, etc.',
-      hidden: ({document}) => document?.availability !== 'forSale',
+      hidden: ({document}) => document?.availability === 'notForSale',
     }),
     defineField({
       name: 'framed',
       type: 'boolean',
-      hidden: ({document}) => document?.availability !== 'forSale',
+      hidden: ({document}) => document?.availability === 'notForSale',
     }),
     defineField({
       name: 'medium',

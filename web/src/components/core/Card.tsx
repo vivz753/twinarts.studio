@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { ArtWork } from "@schemas/global"
+import { availabilityOptions } from "@components/core/Dropdown"
 
 const convertPrice = (price: number) => `$${String(price / 100)}`
 
@@ -10,6 +11,10 @@ interface CardProps {
 
 export const Card: React.FC<React.PropsWithChildren<CardProps>> = ({ onClick, artWork }) => {
   const a = artWork
+  const availabilityTitle = availabilityOptions.find((o) => {
+    if (a.availability === o.value) return o
+  })?.title
+
   return (
     <li onClick={onClick} className="flex cursor-pointer flex-col rounded-md bg-yellow-600 text-white" key={a.id}>
       <span className="max-w-[380px] p-4 text-center text-lg font-semibold wrap-break-word">{a.title}</span>
@@ -31,14 +36,17 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = ({ onClick, ar
               </span>
             )}
             {/* {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>} */}
-            {a.availability === "forSale" && a.price > 0 && (
+            {a.availability !== "notForSale" && a.price > 0 && (
               <span>
                 {convertPrice(a.price)} {a.framed ? "(framed)" : "(unframed)"}
               </span>
             )}
           </div>
         </div>
-        {a.date && <span className="mx-auto">{a.date}</span>}
+        <div className="flex w-full flex-row justify-between">
+          {a.date && <span>{a.date}</span>}
+          {a.availability && availabilityTitle && <span>{availabilityTitle}</span>}
+        </div>
       </div>
     </li>
   )

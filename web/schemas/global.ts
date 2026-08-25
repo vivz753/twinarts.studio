@@ -30,7 +30,7 @@ export interface ArtWork {
   description: string
   width: number
   height: number
-  availability: "displayOnly" | "forSale" | "sold" | "reserved"
+  availability: "available" | "privateCollection" | "sold" | "notForSale"
   featured: boolean
   price: number
   framed: boolean

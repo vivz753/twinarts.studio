@@ -115,8 +115,8 @@ export const artistOptions: Option[] = [
 ]
 export const availabilityOptions: Option[] = [
   { title: "All", value: "all" },
-  { title: "Display Only", value: "displayOnly" },
-  { title: "For Sale", value: "forSale" },
+  { title: "Available", value: "available" },
+  { title: "Not For Sale", value: "notForSale" },
   { title: "Sold", value: "sold" },
-  { title: "Private Collection", value: "reserved" },
+  { title: "Private Collection", value: "privateCollection" },
 ]
