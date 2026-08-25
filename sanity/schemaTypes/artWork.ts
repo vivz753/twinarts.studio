@@ -117,7 +117,7 @@ export const artWork = defineType({
       type: 'array',
       of: [{type: 'string'}],
       options: {
-        list: ['traditional', 'impressionism', 'expressionism', 'abstract'],
+        list: ['realism', 'impressionism', 'expressionism', 'abstract'],
       },
     }),
     defineField({
