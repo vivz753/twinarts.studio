@@ -3,13 +3,15 @@ import type { NextPage } from "next"
 const description = `
 General Pricing Guidelines 
 
-Prices below are provided as approximate estimates only. Final pricing depends on the size, complexity, subject, and level of customization.
+Prices below are approximate estimates. Final pricing may vary depending on the complexity of the composition, subject matter, and level of customization.
 
-Small (8x10 – 11x14): $150 – $400
-Medium (16x20 – 18x24): $400 – $995
-Large (20x24 – 24x36+): $995  – $2500+
+Twin Arts Studio offers three size categories and corresponding price ranges, based on the longest side of the painting.
 
-Please contact us at info@twinarts.studio 
+•	Small (Up to 16 In.): $250 - $800
+•	Medium (Over 16 to 30 In.): $801 - $2500
+•	Large (Over 30 In.): $2501+
+
+For further information, please contact us at shuesnyder@gmail.com
 
 Twin Arts Studio
 `
