@@ -99,7 +99,7 @@ export const dominantColorOptions: Option[] = [
 ]
 
 export const sizeOptions: Option[] = [
-  { title: "Any", value: "any" },
+  { title: "All", value: "any" },
   { title: "Small", value: "small" },
   { title: "Medium", value: "medium" },
   { title: "Large", value: "large" },
