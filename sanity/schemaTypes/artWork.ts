@@ -97,13 +97,22 @@ export const artWork = defineType({
       },
     }),
     defineField({
-      name: 'genre',
-      type: 'array',
-      of: [{type: 'string'}],
-      options: {
-        layout: 'tags',
-      },
-    }),
+  name: 'genre',
+  title: 'Genre',
+  type: 'array',
+  of: [{type: 'string'}],
+  options: {
+    list: [
+      {title: 'Portrait', value: 'portrait'},
+      {title: 'Landscape', value: 'landscape'},
+      {title: 'Still Life', value: 'stillLife'},
+      {title: 'Genre Scene', value: 'genreScene'},
+      {title: 'Wildlife', value: 'wildlife'},
+      {title: 'Floral/Botanical', value: 'floralBotanical'},
+      {title: 'Figurative', value: 'figurative'},
+    ],
+  },
+}),
     defineField({
       name: 'subject',
       type: 'array',
