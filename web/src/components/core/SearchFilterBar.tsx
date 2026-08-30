@@ -57,12 +57,6 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
               />
             </div>
           )}
-          {size && setSize && (
-            <div className="flex flex-col items-start gap-1">
-              <span className="whitespace-nowrap">Size</span>
-              <Dropdown setOption={(size) => setSize(size)} options={sizeOptions} currentOption={size} />
-            </div>
-          )}
           {artist && setArtist && (
             <div className="flex flex-col items-start gap-1">
               <span className="whitespace-nowrap">Artist</span>
@@ -75,6 +69,13 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
               <Dropdown setOption={(genre) => setGenre(genre)} options={genreOptions} currentOption={genre} />
             </div>
           )}
+          {size && setSize && (
+            <div className="flex flex-col items-start gap-1">
+              <span className="whitespace-nowrap">Size</span>
+              <Dropdown setOption={(size) => setSize(size)} options={sizeOptions} currentOption={size} />
+            </div>
+          )}
+
           {price && setPrice && (
             <div className="flex flex-col items-start gap-1">
               <span>Price</span>

@@ -1,6 +1,6 @@
-import { loadArtWork, loadGenres } from "@sanity/loadArtWork"
+import { loadArtWork } from "@sanity/loadArtWork"
 import { ArtWork } from "@schemas/global"
-import { artistOptions, availabilityOptions, sizeOptions } from "@src/components/core/Dropdown"
+import { availabilityOptions, artistOptions,  genreOptions, sizeOptions, priceOptions } from "@src/components/core/Dropdown"
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import { useMemo, useState } from "react"
 import Modal from "@/src/components/core/Modal"
@@ -12,41 +12,19 @@ import {
   filterByGenre,
   filterByArtist,
   filterBySize,
-  capitalizeWords,
+  sortByPrice,
 } from "@/src/helpers"
 
-const GalleryPage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
+const GalleryPage: NextPage<{ artWork: ArtWork[] }> = ({
   artWork,
-  genres,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  // fetch the genres directly from Sanity.IO and get the unique list to use as options
-  const uniqueGenres = useMemo(
-    () => [
-      ...new Set(
-        genres
-          .flat()
-          .filter((g) => g !== null && g.trim() !== "")
-          .map((g) => {
-            return g.trim().toLowerCase()
-          }),
-      ),
-      "all",
-    ],
-    [genres],
-  )
-  // console.log("genres", genres.flat())
-  // console.log("uniqueGenres", uniqueGenres)
-
-  const genreOptions = uniqueGenres.sort().map((g) => {
-    return { title: capitalizeWords(g), value: g }
-  })
 
   const [searchValue, setSearchValue] = useState("")
   const [artist, setArtist] = useState(artistOptions[0])
   const [genre, setGenre] = useState(genreOptions[0])
   const [availability, setAvailability] = useState(availabilityOptions[0])
   const [size, setSize] = useState(sizeOptions[0])
-
+  const [price, setPrice] = useState(priceOptions[0])
   const [activeWork, setActiveWork] = useState<ArtWork>(artWork[0])
   const [showModal, setShowModal] = useState(false)
 
@@ -64,9 +42,9 @@ const GalleryPage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
   // TODO: add a debouncer
   // TODO: consider making this async
   const filteredArtwork = useMemo(
-    () =>
-      // TODO: consider swapping order of filters to improve perf
-
+  () =>
+    // TODO: consider swapping order of filters to improve perf
+    sortByPrice(
       filterByGenre(
         filterByAvailability(
           filterBySize(filterByArtist(filterBySearch(artWork, searchValue), artist), size),
@@ -74,9 +52,11 @@ const GalleryPage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
         ),
         genre,
       )?.filter((product) => !product.hidden),
+      price,
+    ),
 
-    [availability, size, searchValue, artist, genre, artWork],
-  )
+  [availability, size, searchValue, artist, genre, price, artWork],
+)
 
   console.log("filteredArtwork", filteredArtwork)
 
@@ -94,6 +74,8 @@ const GalleryPage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
         genre={genre}
         setGenre={setGenre}
         genreOptions={genreOptions}
+        price={price}
+        setPrice={setPrice}
       />
       <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
         <ul className="grid-auto-flow grid place-items-center gap-12 lg:grid-cols-2 xl:grid-cols-3 xl:gap-20">
@@ -126,21 +108,19 @@ const GalleryPage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
 
 export default GalleryPage
 
-export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork>; genres: string[] }> = (async () => {
+export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork> }> = (async () => {
   const artWork = await loadArtWork()
-  const genres = await loadGenres()
 
   console.log("getStaticProps artWork:", artWork)
-  console.log("getStaticProps genres:", genres)
 
   return {
     props: {
       artWork: artWork,
-      genres: genres,
     },
     revalidate: 60, // important to revalidate cached datasets in case updates to Sanity get published
   }
 }) satisfies GetStaticProps<{
   artWork: ArtWork
-  genres: string[]
 }>
+
+

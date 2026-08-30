@@ -97,7 +97,16 @@ export const dominantColorOptions: Option[] = [
   { title: "Cold Palette", value: "coldPalette" },
   { title: "Warm Palette", value: "warmPalette" },
 ]
-
+export const genreOptions: Option[] = [
+  { title: "All", value: "all" },
+  { title: "Portrait", value: "portrait" },
+  { title: "Landscape", value: "landscape" },
+  { title: "Still Life", value: "stillLife" },
+  { title: "Genre Scene", value: "genreScene" },
+  { title: "Wildlife", value: "wildlife" },
+  { title: "Floral/Botanical", value: "floralBotanical" },
+  { title: "Figurative", value: "figurative" },
+]
 export const sizeOptions: Option[] = [
   { title: "All", value: "any" },
   { title: "Small", value: "small" },
@@ -105,6 +114,7 @@ export const sizeOptions: Option[] = [
   { title: "Large", value: "large" },
 ]
 export const priceOptions: Option[] = [
+  { title: "All", value: "all" },
   { title: "Low to High", value: "ascending" },
   { title: "High to Low", value: "descending" },
 ]
