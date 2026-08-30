@@ -91,10 +91,11 @@ export const filterByArtist = (products: ArtWork[], input: { title: string; valu
 }
 
 export const sortByPrice = (products: ArtWork[], input: { title: string; value: string }) => {
+  if (input.value === "all") return products
   if (input.value === "ascending") {
-    return products.sort((a, b) => a.price - b.price)
+    return [...products].sort((a, b) => a.price - b.price)
   } else if (input.value === "descending") {
-    return products.sort((a, b) => b.price - a.price)
+    return [...products].sort((a, b) => b.price - a.price)
   }
 }
 
