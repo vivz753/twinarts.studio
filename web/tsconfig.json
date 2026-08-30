@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2015",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -14,14 +18,33 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@*": ["./*"],
-      "@components/*": ["./src/components/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@sanity/*": ["./src/sanity/*"],
-      "@helpers/*": ["./src/helpers/*"]
-    }
+      "@*": [
+        "./*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@sanity/*": [
+        "./src/sanity/*"
+      ],
+      "@helpers/*": [
+        "./src/helpers/*"
+      ]
+    },
+    "moduleResolution": "node"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
-  "types": ["types"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "types": [
+    "types"
+  ]
 }
