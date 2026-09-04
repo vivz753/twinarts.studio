@@ -108,7 +108,7 @@ export const genreOptions: Option[] = [
   { title: "Figurative", value: "figurative" },
 ]
 export const sizeOptions: Option[] = [
-  { title: "All", value: "any" },
+  { title: "All", value: "all" },
   { title: "Small", value: "small" },
   { title: "Medium", value: "medium" },
   { title: "Large", value: "large" },
@@ -126,7 +126,9 @@ export const artistOptions: Option[] = [
 export const availabilityOptions: Option[] = [
   { title: "All", value: "all" },
   { title: "Available", value: "available" },
-  { title: "Not For Sale", value: "notForSale" },
+  { title: "Reserved", value: "reserved" },
   { title: "Sold", value: "sold" },
+  { title: "Not For Sale", value: "notForSale" },
   { title: "Private Collection", value: "privateCollection" },
+  
 ]

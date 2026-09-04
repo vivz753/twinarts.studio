@@ -48,21 +48,6 @@ export const filterBySearch = (products: ArtWork[], input: string) => {
 //   return products.filter((product) => product.dimensions.toLowerCase() === input.value.toLowerCase())
 // }
 
-export const filterBySize = (products: ArtWork[], input: { title: string; value: string }) => {
-  if (input.value === "any") return products
-  // small < 16 & > 0
-  // med < 32 & > 16
-  // large > 32
-
-  const filtered = products.filter((product) => {
-    const longestSide = Math.max(product.width, product.height)
-    if (input.value === "large" && longestSide > 30) return true
-    if (input.value === "medium" && longestSide > 16) return true
-    if (input.value === "small" && longestSide > 0 && longestSide < 16) return true
-    return false
-  })
-  return filtered
-}
 
 export const filterByAvailability = (products: ArtWork[], input: { title: string; value: string }) => {
   if (input.value === "all") return products
@@ -76,7 +61,7 @@ export const filterByAvailability = (products: ArtWork[], input: { title: string
 export const filterByGenre = (products: ArtWork[], input: { title: string; value: string }) => {
   if (input.value === "all") return products
   return products.filter((product) => {
-    return product.genre?.includes(input.value.toLowerCase())
+    return product.genre?.includes(input.value)
   })
 }
 
@@ -92,11 +77,40 @@ export const filterByArtist = (products: ArtWork[], input: { title: string; valu
 
 export const sortByPrice = (products: ArtWork[], input: { title: string; value: string }) => {
   if (input.value === "all") return products
+
+  const priceableStatuses = ["available", "reserved", "sold"]
+
+  const priceableProducts = products.filter((product) =>
+    priceableStatuses.includes(product.availability),
+  )
+
+  const otherProducts = products.filter(
+    (product) => !priceableStatuses.includes(product.availability),
+  )
+
   if (input.value === "ascending") {
-    return [...products].sort((a, b) => a.price - b.price)
+    return [...priceableProducts].sort((a, b) => a.price - b.price).concat(otherProducts)
   } else if (input.value === "descending") {
-    return [...products].sort((a, b) => b.price - a.price)
+    return [...priceableProducts].sort((a, b) => b.price - a.price).concat(otherProducts)
   }
+
+  return products
+}
+
+export const filterBySize = (products: ArtWork[], input: { title: string; value: string }) => {
+  if (input.value === "all") return products
+
+  const filtered = products.filter((product) => {
+    const longestSide = Math.max(product.width, product.height)
+
+    if (input.value === "large" && longestSide > 30) return true
+    if (input.value === "medium" && longestSide > 16 && longestSide <= 30) return true
+    if (input.value === "small" && longestSide > 0 && longestSide <= 16) return true
+
+    return false 
+  })
+
+  return filtered
 }
 
 export const capitalizeWords = (str: string) => {
@@ -105,3 +119,4 @@ export const capitalizeWords = (str: string) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ")
 }
+

@@ -22,8 +22,11 @@ export interface SearchFilterBarProps {
   genre: Option
   setGenre: React.Dispatch<React.SetStateAction<Option>>
   genreOptions: Option[]
+  clearFilters: () => void
 }
 
+
+// Shue 2
 export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarProps>> = ({
   searchValue,
   setSearchValue,
@@ -38,6 +41,7 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
   genre,
   setGenre,
   genreOptions,
+  clearFilters,
 }) => {
   return (
     <div className="group sticky top-0 z-20 flex w-full justify-center bg-yellow-600">
@@ -47,6 +51,12 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
           <Searchbar className="flex w-full" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
         </div> */}
         <div className="flex w-full flex-row justify-between lg:w-auto lg:gap-5">
+          {artist && setArtist && (
+            <div className="flex flex-col items-start gap-1">
+              <span className="whitespace-nowrap">Artist</span>
+              <Dropdown setOption={(artist) => setArtist(artist)} options={artistOptions} currentOption={artist} />
+            </div>
+          )}
           {availability && setAvailability && (
             <div className="flex flex-col items-start gap-1">
               <span className="whitespace-nowrap">Availability</span>
@@ -56,13 +66,7 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
                 currentOption={availability}
               />
             </div>
-          )}
-          {artist && setArtist && (
-            <div className="flex flex-col items-start gap-1">
-              <span className="whitespace-nowrap">Artist</span>
-              <Dropdown setOption={(artist) => setArtist(artist)} options={artistOptions} currentOption={artist} />
-            </div>
-          )}
+          )}                    
           {genre && setGenre && (
             <div className="flex flex-col items-start gap-1">
               <span className="whitespace-nowrap">Genre</span>
@@ -82,6 +86,11 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
               <Dropdown setOption={(price) => setPrice(price)} options={priceOptions} currentOption={price} />
             </div>
           )}
+        <div className="flex flex-col justify-end">
+          <button type="button" onClick={clearFilters} className="whitespace-nowrap">
+             Clear Filters
+          </button>
+        </div>
         </div>
       </div>
     </div>

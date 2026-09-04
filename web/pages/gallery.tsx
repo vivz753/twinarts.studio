@@ -27,8 +27,18 @@ const GalleryPage: NextPage<{ artWork: ArtWork[] }> = ({
   const [price, setPrice] = useState(priceOptions[0])
   const [activeWork, setActiveWork] = useState<ArtWork>(artWork[0])
   const [showModal, setShowModal] = useState(false)
+  //Shue 1
+const clearFilters = () => {
+  setSearchValue("")
+  setArtist(artistOptions[0])
+  setAvailability(availabilityOptions[0])
+  setGenre(genreOptions[0])
+  setSize(sizeOptions[0])
+  setPrice(priceOptions[0])
+}
 
-  const onNext = (): void => {
+  //Shue 1 end
+    const onNext = (): void => {
     const currIndex = artWork.findIndex((i) => i === activeWork)
     const nextIndex = currIndex < artWork.length - 1 ? currIndex + 1 : 0
     setActiveWork(() => artWork[nextIndex])
@@ -43,23 +53,30 @@ const GalleryPage: NextPage<{ artWork: ArtWork[] }> = ({
   // TODO: consider making this async
   const filteredArtwork = useMemo(
   () =>
-    // TODO: consider swapping order of filters to improve perf
     sortByPrice(
       filterByGenre(
         filterByAvailability(
-          filterBySize(filterByArtist(filterBySearch(artWork, searchValue), artist), size),
+          filterBySize(
+            filterByArtist(
+              filterBySearch(
+                artWork.filter((product) => !product.hidden),
+                searchValue,
+              ),
+              artist,
+            ),
+            size,
+          ),
           availability,
         ),
         genre,
-      )?.filter((product) => !product.hidden),
+      ),
       price,
     ),
-
   [availability, size, searchValue, artist, genre, price, artWork],
 )
 
   console.log("filteredArtwork", filteredArtwork)
-
+ 
   return (
     <div className="flex h-full min-h-screen flex-col items-center pt-[90px] pb-[90px]">
       <SearchFilterBar
@@ -76,6 +93,7 @@ const GalleryPage: NextPage<{ artWork: ArtWork[] }> = ({
         genreOptions={genreOptions}
         price={price}
         setPrice={setPrice}
+        clearFilters={clearFilters}
       />
       <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
         <ul className="grid-auto-flow grid place-items-center gap-12 lg:grid-cols-2 xl:grid-cols-3 xl:gap-20">
@@ -112,7 +130,18 @@ export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork> }> = (asyn
   const artWork = await loadArtWork()
 
   console.log("getStaticProps artWork:", artWork)
+  // Shue 
+console.log(
+  "ARTWORK PRICES:",
+  artWork.map((item: ArtWork) => ({
+    title: item.title,
+    availability: item.availability,
+    price: item.price,
+  })),
+)
 
+  //
+  
   return {
     props: {
       artWork: artWork,

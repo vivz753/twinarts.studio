@@ -36,7 +36,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = ({ onClick, ar
               </span>
             )}
             {/* {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>} */}
-            {a.availability !== "notForSale" && a.price > 0 && (
+            {["available", "reserved", "sold"].includes(a.availability) && a.price > 0 && (
               <span>
                 {convertPrice(a.price)} {a.framed ? "(framed)" : "(unframed)"}
               </span>

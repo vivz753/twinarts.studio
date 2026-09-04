@@ -50,9 +50,10 @@ export const artWork = defineType({
       options: {
         list: [
           {title: 'Available', value: 'available'},
-          {title: 'Private Collection', value: 'privateCollection'},
-          {title: 'Not For Sale', value: 'notForSale'},
+          {title: 'Reserved', value: 'reserved'},
           {title: 'Sold', value: 'sold'},
+          {title: 'Not For Sale', value: 'notForSale'},
+          {title: 'Private Collection', value: 'privateCollection'},
         ],
         layout: 'radio',
       },
