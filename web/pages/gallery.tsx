@@ -95,8 +95,8 @@ const clearFilters = () => {
         setPrice={setPrice}
         clearFilters={clearFilters}
       />
-      <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
-        <ul className="grid-auto-flow grid place-items-center gap-12 lg:grid-cols-2 xl:grid-cols-3 xl:gap-20">
+      <div className="flex w-screen items-center justify-center gap-12 px-16 py-12">
+         <ul className="w-full max-w-[1400px] columns-1 gap-8 md:columns-2 lg:columns-3 xl:columns-4">   
           {filteredArtwork && filteredArtwork.length > 0 ? (
             filteredArtwork.map((a) => (
               <Card

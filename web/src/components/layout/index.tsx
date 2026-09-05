@@ -28,11 +28,21 @@ const Header: FC = () => {
           <span className="italic text-xs sm:block">Original Oil Paintings & Commissions</span>
         </div>
       </Link>
-      {labels.map((label, i) => (
-        <Link key={i} href={label.url}>
-          <span className="text-sm text-white hover:text-yellow-900 sm:text-base">{label.name}</span>
-        </Link>
-      ))}
+      {labels.map((label, i) =>
+  label.name === "Gallery" ? (
+    <a key={i} href={label.url}>
+      <span className="text-sm text-white hover:text-yellow-900 sm:text-base">
+        {label.name}
+      </span>
+    </a>
+  ) : (
+    <Link key={i} href={label.url}>
+      <span className="text-sm text-white hover:text-yellow-900 sm:text-base">
+        {label.name}
+      </span>
+    </Link>
+  )
+)}
     </header>
   )
 }

@@ -1,4 +1,4 @@
-import Image from "next/image"
+
 import { ArtWork } from "@schemas/global"
 import { availabilityOptions } from "@components/core/Dropdown"
 
@@ -16,38 +16,70 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = ({ onClick, ar
   })?.title
 
   return (
-    <li onClick={onClick} className="flex cursor-pointer flex-col rounded-md bg-yellow-600 text-white" key={a.id}>
-      <span className="max-w-[380px] p-4 text-center text-lg font-semibold wrap-break-word">{a.title}</span>
+    <li className="mb-8 inline-flex w-fit break-inside-avoid flex-col text-gray-900">
+      <div className="flex w-fit flex-col items-start"></div>
       {a.imageUrl && (
-        <div className="relative h-[380px] w-[380px] shrink-0 overflow-hidden bg-yellow-600">
-          <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
-        </div>
+        <img
+          alt={a.title}
+          src={a.imageUrl}
+          onClick={onClick}
+          className="h-auto max-h-[320px] w-auto max-w-[340px] object-contain"
+  />
+)}
+<div className="flex max-w-[380px] flex-col gap-1.5 py-2 text-left">
+
+  {/* Title + Artist */}
+  <div className="leading-snug">
+  <span className="text-base font-medium tracking-tight">{a.title}</span>
+  {a.artist && (
+    <span className="ml-1.5 text-[15px] font-light italic text-gray-500">
+      by {a.artist === "shueSnyder" ? "Shue Snyder" : "Gina Lin"}
+    </span>
+  )}
+</div>
+
+  {/* Medium · Size · Year */}
+  <div className="flex flex-wrap items-center gap-x-2 text-sm leading-relaxed text-gray-500">
+    {a.medium && a.medium.length > 0 && (
+      <span className="capitalize">{a.medium.join(", ")}</span>
+    )}
+
+    {a.medium && a.medium.length > 0 && a.width && a.height && (
+  <span className="text-gray-400">·</span>
+)}
+
+    {a.width && a.height && (
+      <span>
+        {a.width} × {a.height} in.
+      </span>
+    )}
+
+    {(a.medium?.length || (a.width && a.height)) && a.date && <span>·</span>}
+
+    {a.date && <span>{String(a.date).slice(0, 4)}</span>}
+  </div>
+
+  {/* Price · Availability */}
+  {(a.availability || a.price > 0) && (
+    <div className="flex flex-wrap items-center gap-x-1.5 text-sm">
+      {["available", "reserved"].includes(a.availability) && a.price > 0 && (
+        <span className="font-medium">
+          {convertPrice(a.price)} {a.framed ? "(framed)" : "(unframed)"}
+        </span>
       )}
-      <div className="flex flex-col gap-4 px-6 py-4">
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-col gap-1">
-            {a.artist && <span>{a.artist === "shueSnyder" ? "Shue Snyder" : "Gina Lin"}</span>}
-            {a.medium && a.medium.length && <span className="capitalize">{a.medium.join(", ")}</span>}
-          </div>
-          <div className="flex flex-col gap-1">
-            {a.width && a.height && (
-              <span>
-                {a.width}x{a.height} in.
-              </span>
-            )}
-            {/* {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>} */}
-            {["available", "reserved", "sold"].includes(a.availability) && a.price > 0 && (
-              <span>
-                {convertPrice(a.price)} {a.framed ? "(framed)" : "(unframed)"}
-              </span>
-            )}
-          </div>
-        </div>
-        <div className="flex w-full flex-row justify-between">
-          {a.date && <span>{a.date}</span>}
-          {a.availability && availabilityTitle && <span>{availabilityTitle}</span>}
-        </div>
-      </div>
+
+      {["available", "reserved"].includes(a.availability) &&
+        a.price > 0 &&
+        availabilityTitle && <span className="text-gray-400">·</span>}
+
+      {a.availability && availabilityTitle && (
+        <span className="text-gray-600">{availabilityTitle}</span>
+      )}
+    </div>
+  )}
+
+</div>
+      
     </li>
   )
 }

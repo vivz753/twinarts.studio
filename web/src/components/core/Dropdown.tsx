@@ -52,19 +52,19 @@ export const Dropdown: FC<React.PropsWithChildren<DropdownProps>> = ({
       role="button"
       onClick={toggleOptions}
       className={clsx(
-        "relative flex w-full min-w-fit items-center rounded-md bg-yellow-700 p-2",
-        border && "border border-yellow-500",
-        outline && "focus:outline focus:outline-white",
+        "relative flex w-full min-w-fit items-center rounded-sm bg-white px-3 py-2 transition-colors hover:bg-gray-50",
+         border && "border border-gray-300",
+         outline && "focus:outline focus:outline-1 focus:outline-gray-500",
       )}
     >
       <div className={clsx(className, "flex w-full flex-row items-center gap-2")}>
-        <span className="font-medium whitespace-nowrap text-white select-none">{currentOption.title}</span>
+        <span className="whitespace-nowrap text-sm font-normal text-gray-700 select-none">{currentOption.title}</span>
         {caretStyle === "withCircle" ? (
           <span className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white">
             <DownCaretIcon className={clsx(showOptions && "rotate-180", "h-2 w-2 fill-white")} />
           </span>
         ) : (
-          <DownCaretIcon className={clsx(showOptions && "rotate-180", "ml-auto h-4 w-4 fill-white")} />
+          <DownCaretIcon className={clsx(showOptions && "rotate-180", "ml-auto h-3 w-3 fill-gray-500")} />
         )}
       </div>
       {showOptions && (
