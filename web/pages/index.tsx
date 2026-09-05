@@ -27,19 +27,23 @@ const Home: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticProps
         <div className="mt-10 flex w-full max-w-full flex-col items-center justify-center gap-8 p-8">
           <p className="text-center text-2xl font-bold">Original Oil Paintings & Commissions</p>
           <p className="flex max-w-[800px] whitespace-pre-line">{description}</p>
-          {/* Gallery */}
-          {artWork && artWork.length > 0 && (
-            <div className="flex w-full flex-wrap justify-center gap-20 py-10">
-              {artWork.map((a) => (
-                <div
-                  key={a.id}
-                  className="relative h-[380px] w-[380px] shrink-0 overflow-hidden rounded-md bg-yellow-600"
-                >
-                  <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
-                </div>
-              ))}
-            </div>
-          )}
+    {/* Featured Artwork */}
+{artWork && artWork.length > 0 && (
+  <div className="w-full max-w-[1400px] columns-1 gap-8 py-10 md:columns-2 lg:columns-3 xl:columns-4">
+    {artWork.map((a) => (
+      <div
+        key={a.id}
+        className="mb-8 inline-block w-full break-inside-avoid text-center"
+      >
+        <img
+          alt={a.title}
+          src={a.imageUrl}
+          className="mx-auto h-auto max-h-[320px] w-auto max-w-full object-contain"
+        />
+      </div>
+    ))}
+  </div>
+)}      
         </div>
       </div>
     </>
