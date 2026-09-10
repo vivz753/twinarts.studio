@@ -82,9 +82,10 @@ export const artWork = defineType({
       of: [{type: 'string'}],
       options: {
         list: [
+          {title: 'Acrylic', value: 'acrylic'},
           {title: 'Charcoal', value: 'charcoal'},
           {title: 'Oil', value: 'oil'},
-          {title: 'Acrylic', value: 'acrylic'},
+          {title: 'Pastel', value: 'pastel'},
           {title: 'Watercolor', value: 'watercolor'},
           {title: 'Watercolor Pencils', value: 'watercolorPencils'},
         ]
