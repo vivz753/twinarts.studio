@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'expressionbyshue.art',
 
-  projectId: 'lpnrji1s',
+  projectId:'flmc67dk',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
